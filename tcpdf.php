@@ -8080,7 +8080,7 @@ class TCPDF {
 			define('PHP_VERSION_ID', (($version[0] * 10000) + ($version[2] * 100) + $version[4]));
 		}
 		if (PHP_VERSION_ID < 50300) {
-			@set_magic_quotes_runtime($mqr);
+//			@set_magic_quotes_runtime($mqr);
 		}
 	}
 
@@ -8095,7 +8095,7 @@ class TCPDF {
 			define('PHP_VERSION_ID', (($version[0] * 10000) + ($version[2] * 100) + $version[4]));
 		}
 		if (PHP_VERSION_ID < 50300) {
-			return @get_magic_quotes_runtime();
+//			return @get_magic_quotes_runtime();
 		}
 		return 0;
 	}
@@ -16761,14 +16761,14 @@ class TCPDF {
 		$k = $this->k;
 		$this->javascript .= sprintf("f".$name."=this.addField('%s','%s',%u,[%F,%F,%F,%F]);", $name, $type, $this->PageNo()-1, $x*$k, ($this->h-$y)*$k+1, ($x+$w)*$k, ($this->h-$y-$h)*$k+1)."\n";
 		$this->javascript .= 'f'.$name.'.textSize='.$this->FontSizePt.";\n";
-		while (list($key, $val) = each($prop)) {
-			if (strcmp(substr($key, -5), 'Color') == 0) {
-				$val = $this->_JScolor($val);
-			} else {
-				$val = "'".$val."'";
-			}
-			$this->javascript .= 'f'.$name.'.'.$key.'='.$val.";\n";
-		}
+        foreach ($prop as $key => $val) {
+            if (strcmp(substr($key, -5), 'Color') == 0) {
+                $val = $this->_JScolor($val);
+            } else {
+                $val = "'".$val."'";
+            }
+            $this->javascript .= 'f'.$name.'.'.$key.'='.$val.";\n";
+        }
 		if ($this->rtl) {
 			$this->x -= $w;
 		} else {
@@ -21301,9 +21301,9 @@ class TCPDF {
 					// get attributes
 					preg_match_all('/([^=\s]*)[\s]*=[\s]*"([^"]*)"/', $element, $attr_array, PREG_PATTERN_ORDER);
 					$dom[$key]['attribute'] = array(); // reset attribute array
-					while (list($id, $name) = each($attr_array[1])) {
-						$dom[$key]['attribute'][strtolower($name)] = $attr_array[2][$id];
-					}
+                    foreach ($attr_array[1] as $id => $name) {
+                        $dom[$key]['attribute'][strtolower($name)] = $attr_array[2][$id];
+                    }
 					if (!empty($css)) {
 						// merge CSS style to current style
 						list($dom[$key]['csssel'], $dom[$key]['cssdata']) = $this->getCSSdataArray($dom, $key, $css);
@@ -21314,10 +21314,10 @@ class TCPDF {
 						// get style attributes
 						preg_match_all('/([^;:\s]*):([^;]*)/', $dom[$key]['attribute']['style'], $style_array, PREG_PATTERN_ORDER);
 						$dom[$key]['style'] = array(); // reset style attribute array
-						while (list($id, $name) = each($style_array[1])) {
-							// in case of duplicate attribute the last replace the previous
-							$dom[$key]['style'][strtolower($name)] = trim($style_array[2][$id]);
-						}
+                        foreach ($style_array[1] as $id => $name) {
+                            // in case of duplicate attribute the last replace the previous
+                            $dom[$key]['style'][strtolower($name)] = trim($style_array[2][$id]);
+                        }
 						// --- get some style attributes ---
 						// text direction
 						if (isset($dom[$key]['style']['direction'])) {

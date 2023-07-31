@@ -14,7 +14,14 @@
 	}
 	],
 	"require": {
-		"php": ">=8.0"
+		"php": ">=8.0",
+		"phpseclib/mcrypt_compat": "^2.0",
+		"php5friends/polyfill-create_function": "^0.0.4",
+		"ext-curl": "*",
+      	"ext-mbstring": "*",
+      	"ext-zlib": "*",
+      	"ext-gd": "*",
+		"ext-openssl": "*"
 	},
 	"autoload": {
 		"classmap": [
