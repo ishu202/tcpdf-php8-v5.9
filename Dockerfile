@@ -1,4 +1,4 @@
-FROM php:cli as php-cli
+FROM php:cli-alpine as php-cli
 
 # Install system dependencies
 RUN apk add --no-cache \
@@ -35,6 +35,12 @@ RUN set -eux; \
         ssh2 \
         gettext \
     ;
+
+# https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV PATH="${PATH}:/root/.composer/vendor/bin"
+
+COPY --from=composer/composer:2-bin --link /composer /usr/bin/composer
 
 WORKDIR /srv/tcpdf
 

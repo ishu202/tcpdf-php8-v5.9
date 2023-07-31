@@ -4,7 +4,9 @@ services:
   php:
     build:
       context: .
-      dockerfile: Dockerfileq
-      target: php
+      dockerfile: Dockerfile
+      target: php-cli
     stdin_open: true
     restart: unless-stopped
+    volumes:
+      - ./:/srv/tcpdf

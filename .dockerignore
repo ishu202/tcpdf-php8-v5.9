@@ -18,6 +18,7 @@
 **/Dockerfile
 **/Thumbs.db
 .github/
+bin/
 docs/
 public/bundles/
 tests/
