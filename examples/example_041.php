@@ -18,6 +18,7 @@
 //               www.tecnick.com
 //               info@tecnick.com
 //============================================================+
+global $l;
 
 /**
  * Creates an example PDF TEST document using TCPDF
@@ -27,8 +28,9 @@
  * @since 2008-12-07
  */
 
-require_once('../config/lang/eng.php');
-require_once('../tcpdf.php');
+require_once("vendor/autoload.php");
+//require_once('../config/lang/eng.php');
+//require_once('../tcpdf.php');
 
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -78,7 +80,7 @@ Double click on the icon to open the attached file.';
 $pdf->Write(0, $txt, '', 0, 'L', true, 0, false, false, 0);
 
 // attach an external file
-$pdf->Annotation(85, 27, 5, 5, 'text file', array('Subtype'=>'FileAttachment', 'Name' => 'PushPin', 'FS' => '../cache/utf8test.txt'));
+$pdf->Annotation(85, 27, 5, 5, 'text file', array('Subtype'=>'FileAttachment', 'Name' => 'PushPin', 'FS' => getcwd() . '/cache/utf8test.txt'));
 
 // ---------------------------------------------------------
 

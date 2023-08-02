@@ -18,6 +18,7 @@
 //               www.tecnick.com
 //               info@tecnick.com
 //============================================================+
+global $l;
 
 /**
  * Creates an example PDF TEST document using TCPDF
@@ -26,9 +27,9 @@
  * @author Nicola Asuni
  * @since 2008-03-04
  */
-
-require_once('../config/lang/eng.php');
-require_once('../tcpdf.php');
+require_once("vendor/autoload.php");
+//require_once('../config/lang/eng.php');
+//require_once('../tcpdf.php');
 
 
 // Extend the TCPDF class to create custom Header and Footer

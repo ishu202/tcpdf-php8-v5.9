@@ -18,6 +18,7 @@
 //               www.tecnick.com
 //               info@tecnick.com
 //============================================================+
+global $l;
 
 /**
  * Creates an example PDF TEST document using TCPDF
@@ -27,8 +28,9 @@
  * @since 2010-05-06
  */
 
-require_once('../config/lang/eng.php');
-require_once('../tcpdf.php');
+require_once("vendor/autoload.php");
+//require_once('../config/lang/eng.php');
+//require_once('../tcpdf.php');
 
 /**
  * TCPDF class extension with custom header and footer for TOC page

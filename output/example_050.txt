@@ -1,0 +1,31 @@
+
+Deprecated: Automatic conversion of false to array is deprecated in /srv/tcpdf/2dbarcodes.php on line 302
+
+Call Stack:
+    0.0003     422752   1. {main}() /srv/tcpdf/examples/example_050.php:0
+    0.0319    7251296   2. TCPDF->write2DBarcode($code = '111011101110111,010010001000010,010011001110010,010010000010010,010011101110010', $type = 'RAW', $x = 80, $y = 30, $w = 30, $h = 20, $style = ['border' => TRUE, 'vpadding' => 'auto', 'hpadding' => 'auto', 'fgcolor' => [0 => 0, 1 => 0, 2 => 0], 'bgcolor' => FALSE, 'module_width' => 1, 'module_height' => 1], $align = 'N', $distort = ???) /srv/tcpdf/examples/example_050.php:102
+    0.0324    7298024   3. TCPDF2DBarcode->__construct($code = '111011101110111,010010001000010,010011001110010,010010000010010,010011101110010', $type = 'RAW') /srv/tcpdf/tcpdf.php:19966
+    0.0324    7298024   4. TCPDF2DBarcode->setBarcode($code = '111011101110111,010010001000010,010011001110010,010010000010010,010011101110010', $type = 'RAW') /srv/tcpdf/2dbarcodes.php:69
+
+
+Deprecated: Automatic conversion of false to array is deprecated in /srv/tcpdf/2dbarcodes.php on line 302
+
+Call Stack:
+    0.0003     422752   1. {main}() /srv/tcpdf/examples/example_050.php:0
+    0.0329    7298312   2. TCPDF->write2DBarcode($code = '[111011101110111][010010001000010][010011001110010][010010000010010][010011101110010]', $type = 'RAW2', $x = 80, $y = 60, $w = 30, $h = 20, $style = ['border' => TRUE, 'vpadding' => 'auto', 'hpadding' => 'auto', 'fgcolor' => [0 => 0, 1 => 0, 2 => 0], 'bgcolor' => FALSE, 'module_width' => 1, 'module_height' => 1], $align = 'N', $distort = ???) /srv/tcpdf/examples/example_050.php:106
+    0.0329    7300984   3. TCPDF2DBarcode->__construct($code = '[111011101110111][010010001000010][010011001110010][010010000010010][010011101110010]', $type = 'RAW2') /srv/tcpdf/tcpdf.php:19966
+    0.0329    7300984   4. TCPDF2DBarcode->setBarcode($code = '[111011101110111][010010001000010][010011001110010][010010000010010][010011101110010]', $type = 'RAW2') /srv/tcpdf/2dbarcodes.php:69
+
+
+Fatal error: Uncaught ArithmeticError: Bit shift by negative number in /srv/tcpdf/pdf417.php on line 747
+
+ArithmeticError: Bit shift by negative number in /srv/tcpdf/pdf417.php on line 747
+
+Call Stack:
+    0.0003     422752   1. {main}() /srv/tcpdf/examples/example_050.php:0
+    0.0606    7865136   2. TCPDF->write2DBarcode($code = 'www.tcpdf.org', $type = 'PDF417', $x = 80, $y = 90, $w = 0, $h = 30, $style = ['border' => 2, 'vpadding' => 'auto', 'hpadding' => 'auto', 'fgcolor' => [0 => 0, 1 => 0, 2 => 0], 'bgcolor' => FALSE, 'module_width' => 1, 'module_height' => 1], $align = 'N', $distort = ???) /srv/tcpdf/examples/example_050.php:170
+    0.0606    7867808   3. TCPDF2DBarcode->__construct($code = 'www.tcpdf.org', $type = 'PDF417') /srv/tcpdf/tcpdf.php:19966
+    0.0606    7867808   4. TCPDF2DBarcode->setBarcode($code = 'www.tcpdf.org', $type = 'PDF417') /srv/tcpdf/2dbarcodes.php:69
+    0.0618    8029488   5. PDF417->__construct($code = 'www.tcpdf.org', $ecl = -1, $aspectratio = 2, $macro = []) /srv/tcpdf/2dbarcodes.php:272
+    0.0619    8031128   6. PDF417->getErrorCorrectionLevel($ecl = -1, $numcw = 9) /srv/tcpdf/pdf417.php:589
+

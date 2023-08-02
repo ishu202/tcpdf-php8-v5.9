@@ -3544,16 +3544,16 @@ class TCPDF {
 				}
 			}
 			// correct internal cell padding if required to avoid overlap between text and lines
-			if ((strpos($border,'T') !== false) AND ($this->cell_padding['T'] < $adj)) {
+			if ((@strpos($border,'T') !== false) AND ($this->cell_padding['T'] < $adj)) {
 				$this->cell_padding['T'] = $adj;
 			}
-			if ((strpos($border,'R') !== false) AND ($this->cell_padding['R'] < $adj)) {
+			if ((@strpos($border,'R') !== false) AND ($this->cell_padding['R'] < $adj)) {
 				$this->cell_padding['R'] = $adj;
 			}
-			if ((strpos($border,'B') !== false) AND ($this->cell_padding['B'] < $adj)) {
+			if ((@strpos($border,'B') !== false) AND ($this->cell_padding['B'] < $adj)) {
 				$this->cell_padding['B'] = $adj;
 			}
-			if ((strpos($border,'L') !== false) AND ($this->cell_padding['L'] < $adj)) {
+			if ((@strpos($border,'L') !== false) AND ($this->cell_padding['L'] < $adj)) {
 				$this->cell_padding['L'] = $adj;
 			}
 		}
@@ -4314,9 +4314,9 @@ class TCPDF {
 			$this->write1DBarcode($barcode, 'C128', '', $cur_y + $line_width, '', (($this->footer_margin / 3) - $line_width), 0.3, $style, '');
 		}
 		if (empty($this->pagegroups)) {
-			$pagenumtxt = $this->l['w_page'].' '.$this->getAliasNumPage().' / '.$this->getAliasNbPages();
+			$pagenumtxt = @$this->l['w_page'].' '.$this->getAliasNumPage().' / '.$this->getAliasNbPages();
 		} else {
-			$pagenumtxt = $this->l['w_page'].' '.$this->getPageNumGroupAlias().' / '.$this->getPageGroupAlias();
+			$pagenumtxt = @$this->l['w_page'].' '.$this->getPageNumGroupAlias().' / '.$this->getPageGroupAlias();
 		}
 		$this->SetY($cur_y);
 		//Print page number
@@ -5054,29 +5054,29 @@ class TCPDF {
 		$tempstyle = strtoupper($style);
 		$style = '';
 		// underline
-		if (strpos($tempstyle, 'U') !== false) {
+		if (@strpos($tempstyle, 'U') !== false) {
 			$this->underline = true;
 		} else {
 			$this->underline = false;
 		}
 		// line-through (deleted)
-		if (strpos($tempstyle, 'D') !== false) {
+		if (@strpos($tempstyle, 'D') !== false) {
 			$this->linethrough = true;
 		} else {
 			$this->linethrough = false;
 		}
 		// overline
-		if (strpos($tempstyle, 'O') !== false) {
+		if (@strpos($tempstyle, 'O') !== false) {
 			$this->overline = true;
 		} else {
 			$this->overline = false;
 		}
 		// bold
-		if (strpos($tempstyle, 'B') !== false) {
+		if (@strpos($tempstyle, 'B') !== false) {
 			$style .= 'B';
 		}
 		// oblique
-		if (strpos($tempstyle, 'I') !== false) {
+		if (@strpos($tempstyle, 'I') !== false) {
 			$style .= 'I';
 		}
 		$bistyle = $style;
@@ -5204,7 +5204,7 @@ class TCPDF {
 			$styles = array('' => '', 'B' => ',Bold', 'I' => ',Italic', 'BI' => ',BoldItalic');
 			$name .= $styles[$bistyle];
 			// artificial bold
-			if (strpos($bistyle, 'B') !== false) {
+			if (@strpos($bistyle, 'B') !== false) {
 				if (isset($desc['StemV'])) {
 					// from normal to bold
 					$desc['StemV'] = round($desc['StemV'] * 1.75);
@@ -5214,7 +5214,7 @@ class TCPDF {
 				}
 			}
 			// artificial italic
-			if (strpos($bistyle, 'I') !== false) {
+			if (@strpos($bistyle, 'I') !== false) {
 				if (isset($desc['ItalicAngle'])) {
 					$desc['ItalicAngle'] -= 11;
 				} else {
@@ -6358,25 +6358,25 @@ class TCPDF {
 			if (strlen($border) == 4) {
 				$s .= sprintf('%F %F %F %F re S ', $xT, $yT, ($w * $k), (-$h * $k));
 			} elseif (strlen($border) == 3) {
-				if (strpos($border,'B') === false) { // LTR
+				if (@strpos($border,'B') === false) { // LTR
 					$s .= sprintf('%F %F m ', $xL, $yL);
 					$s .= sprintf('%F %F l ', $xT, $yT);
 					$s .= sprintf('%F %F l ', $xR, $yR);
 					$s .= sprintf('%F %F l ', $xB, $yB);
 					$s .= 'S ';
-				} elseif (strpos($border,'L') === false) { // TRB
+				} elseif (@strpos($border,'L') === false) { // TRB
 					$s .= sprintf('%F %F m ', $xT, $yT);
 					$s .= sprintf('%F %F l ', $xR, $yR);
 					$s .= sprintf('%F %F l ', $xB, $yB);
 					$s .= sprintf('%F %F l ', $xL, $yL);
 					$s .= 'S ';
-				} elseif (strpos($border,'T') === false) { // RBL
+				} elseif (@strpos($border,'T') === false) { // RBL
 					$s .= sprintf('%F %F m ', $xR, $yR);
 					$s .= sprintf('%F %F l ', $xB, $yB);
 					$s .= sprintf('%F %F l ', $xL, $yL);
 					$s .= sprintf('%F %F l ', $xT, $yT);
 					$s .= 'S ';
-				} elseif (strpos($border,'R') === false) { // BLT
+				} elseif (@strpos($border,'R') === false) { // BLT
 					$s .= sprintf('%F %F m ', $xB, $yB);
 					$s .= sprintf('%F %F l ', $xL, $yL);
 					$s .= sprintf('%F %F l ', $xT, $yT);
@@ -6384,34 +6384,34 @@ class TCPDF {
 					$s .= 'S ';
 				}
 			} elseif (strlen($border) == 2) {
-				if ((strpos($border,'L') !== false) AND (strpos($border,'T') !== false)) { // LT
+				if ((@strpos($border,'L') !== false) AND (@strpos($border,'T') !== false)) { // LT
 					$s .= sprintf('%F %F m ', $xL, $yL);
 					$s .= sprintf('%F %F l ', $xT, $yT);
 					$s .= sprintf('%F %F l ', $xR, $yR);
 					$s .= 'S ';
-				} elseif ((strpos($border,'T') !== false) AND (strpos($border,'R') !== false)) { // TR
+				} elseif ((@strpos($border,'T') !== false) AND (@strpos($border,'R') !== false)) { // TR
 					$s .= sprintf('%F %F m ', $xT, $yT);
 					$s .= sprintf('%F %F l ', $xR, $yR);
 					$s .= sprintf('%F %F l ', $xB, $yB);
 					$s .= 'S ';
-				} elseif ((strpos($border,'R') !== false) AND (strpos($border,'B') !== false)) { // RB
+				} elseif ((@strpos($border,'R') !== false) AND (@strpos($border,'B') !== false)) { // RB
 					$s .= sprintf('%F %F m ', $xR, $yR);
 					$s .= sprintf('%F %F l ', $xB, $yB);
 					$s .= sprintf('%F %F l ', $xL, $yL);
 					$s .= 'S ';
-				} elseif ((strpos($border,'B') !== false) AND (strpos($border,'L') !== false)) { // BL
+				} elseif ((@strpos($border,'B') !== false) AND (@strpos($border,'L') !== false)) { // BL
 					$s .= sprintf('%F %F m ', $xB, $yB);
 					$s .= sprintf('%F %F l ', $xL, $yL);
 					$s .= sprintf('%F %F l ', $xT, $yT);
 					$s .= 'S ';
-				} elseif ((strpos($border,'L') !== false) AND (strpos($border,'R') !== false)) { // LR
+				} elseif ((@strpos($border,'L') !== false) AND (@strpos($border,'R') !== false)) { // LR
 					$s .= sprintf('%F %F m ', $xL, $yL);
 					$s .= sprintf('%F %F l ', $xT, $yT);
 					$s .= 'S ';
 					$s .= sprintf('%F %F m ', $xR, $yR);
 					$s .= sprintf('%F %F l ', $xB, $yB);
 					$s .= 'S ';
-				} elseif ((strpos($border,'T') !== false) AND (strpos($border,'B') !== false)) { // TB
+				} elseif ((@strpos($border,'T') !== false) AND (@strpos($border,'B') !== false)) { // TB
 					$s .= sprintf('%F %F m ', $xT, $yT);
 					$s .= sprintf('%F %F l ', $xR, $yR);
 					$s .= 'S ';
@@ -6420,19 +6420,19 @@ class TCPDF {
 					$s .= 'S ';
 				}
 			} else { // strlen($border) == 1
-				if (strpos($border,'L') !== false) { // L
+				if (@strpos($border,'L') !== false) { // L
 					$s .= sprintf('%F %F m ', $xL, $yL);
 					$s .= sprintf('%F %F l ', $xT, $yT);
 					$s .= 'S ';
-				} elseif (strpos($border,'T') !== false) { // T
+				} elseif (@strpos($border,'T') !== false) { // T
 					$s .= sprintf('%F %F m ', $xT, $yT);
 					$s .= sprintf('%F %F l ', $xR, $yR);
 					$s .= 'S ';
-				} elseif (strpos($border,'R') !== false) { // R
+				} elseif (@strpos($border,'R') !== false) { // R
 					$s .= sprintf('%F %F m ', $xR, $yR);
 					$s .= sprintf('%F %F l ', $xB, $yB);
 					$s .= 'S ';
-				} elseif (strpos($border,'B') !== false) { // B
+				} elseif (@strpos($border,'B') !== false) { // B
 					$s .= sprintf('%F %F m ', $xB, $yB);
 					$s .= sprintf('%F %F l ', $xL, $yL);
 					$s .= 'S ';
@@ -6824,7 +6824,7 @@ class TCPDF {
 		foreach ($brd as $border => $style) {
 			switch ($position) {
 				case 'start': {
-					if (strpos($border, 'B') !== false) {
+					if (@strpos($border, 'B') !== false) {
 						// remove bottom line
 						$newkey = str_replace('B', '', $border);
 						if (strlen($newkey) > 0) {
@@ -6835,7 +6835,7 @@ class TCPDF {
 					break;
 				}
 				case 'middle': {
-					if (strpos($border, 'B') !== false) {
+					if (@strpos($border, 'B') !== false) {
 						// remove bottom line
 						$newkey = str_replace('B', '', $border);
 						if (strlen($newkey) > 0) {
@@ -6844,7 +6844,7 @@ class TCPDF {
 						unset($brd[$border]);
 						$border = $newkey;
 					}
-					if (strpos($border, 'T') !== false) {
+					if (@strpos($border, 'T') !== false) {
 						// remove bottom line
 						$newkey = str_replace('T', '', $border);
 						if (strlen($newkey) > 0) {
@@ -6855,7 +6855,7 @@ class TCPDF {
 					break;
 				}
 				case 'end': {
-					if (strpos($border, 'T') !== false) {
+					if (@strpos($border, 'T') !== false) {
 						// remove bottom line
 						$newkey = str_replace('T', '', $border);
 						if (strlen($newkey) > 0) {
@@ -8214,7 +8214,7 @@ class TCPDF {
 		// check for embedded ICC profile
 		$icc = array();
 		$offset = 0;
-		while (($pos = strpos($data, "ICC_PROFILE\0", $offset)) !== false) {
+		while (($pos = @strpos($data, "ICC_PROFILE\0", $offset)) !== false) {
 			// get ICC sequence length
 			$length = ($this->_getUSHORT($data, ($pos - 2)) - 16);
 			// marker sequence number
@@ -8318,7 +8318,7 @@ class TCPDF {
 				} elseif ($ct == 2) {
 					$trns = array(ord($t[1]), ord($t[3]), ord($t[5]));
 				} else {
-					$pos = strpos($t, chr(0));
+					$pos = @strpos($t, chr(0));
 					if ($pos !== false) {
 						$trns = array($pos);
 					}
@@ -8683,7 +8683,7 @@ class TCPDF {
 			// define the ByteRange
 			$byte_range = array();
 			$byte_range[0] = 0;
-			$byte_range[1] = strpos($pdfdoc, $this->byterange_string) + $byterange_string_len + 10;
+			$byte_range[1] = @strpos($pdfdoc, $this->byterange_string) + $byterange_string_len + 10;
 			$byte_range[2] = $byte_range[1] + $this->signature_max_length + 2;
 			$byte_range[3] = strlen($pdfdoc) - $byte_range[2];
 			$pdfdoc = substr($pdfdoc, 0, $byte_range[1]).substr($pdfdoc, $byte_range[2]);
@@ -8713,7 +8713,7 @@ class TCPDF {
 			unlink($tempsign);
 			// extract signature
 			$signature = substr($signature, $pdfdoc_length);
-			$signature = substr($signature, (strpos($signature, "%%EOF\n\n------") + 13));
+			$signature = substr($signature, (@strpos($signature, "%%EOF\n\n------") + 13));
 			$tmparr = explode("\n\n", $signature);
 			$signature = $tmparr[1];
 			unset($tmparr);
@@ -8767,7 +8767,7 @@ class TCPDF {
 				header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Date in the past
 				header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
 				// force download dialog
-				if (strpos(php_sapi_name(), 'cgi') === false) {
+				if (@strpos(php_sapi_name(), 'cgi') === false) {
 					header('Content-Type: application/force-download');
 					header('Content-Type: application/octet-stream', false);
 					header('Content-Type: application/download', false);
@@ -8819,7 +8819,7 @@ class TCPDF {
 					header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Date in the past
 					header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
 					// force download dialog
-					if (strpos(php_sapi_name(), 'cgi') === false) {
+					if (@strpos(php_sapi_name(), 'cgi') === false) {
 						header('Content-Type: application/force-download');
 						header('Content-Type: application/octet-stream', false);
 						header('Content-Type: application/download', false);
@@ -8960,7 +8960,7 @@ class TCPDF {
 	protected function replacePageNumAliases($page, $replace, $diff=0) {
 		foreach ($replace as $rep) {
 			foreach ($rep[3] as $a) {
-				if (strpos($page, $a) !== false) {
+				if (@strpos($page, $a) !== false) {
 					$page = str_replace($a, $rep[0], $page);
 					$diff += ($rep[2] - $rep[1]);
 				}
@@ -8982,11 +8982,11 @@ class TCPDF {
 		foreach ($aliases as $type => $alias) {
 			foreach ($alias as $a) {
 				// find position of compensation factor
-				$startnum = (strpos($a, ':') + 1);
+				$startnum = (@strpos($a, ':') + 1);
 				$a = substr($a, 0, $startnum);
-				if (($pos = strpos($page, $a)) !== false) {
+				if (($pos = @strpos($page, $a)) !== false) {
 					// end of alias
-					$endnum = strpos($page, '}', $pos);
+					$endnum = @strpos($page, '}', $pos);
 					// string to be replaced
 					$aa = substr($page, $pos, ($endnum - $pos + 1));
 					// get compensation factor
@@ -10222,7 +10222,7 @@ class TCPDF {
 			}
 			$fmetric['Leading'] = 0;
 			// get charstring data
-			$eplain = substr($eplain, (strpos($eplain, '/CharStrings') + 1));
+			$eplain = substr($eplain, (@strpos($eplain, '/CharStrings') + 1));
 			preg_match_all('#/([A-Za-z0-9\.]*)[\s][0-9]+[\s]RD[\s](.*)[\s]ND#sU', $eplain, $matches, PREG_SET_ORDER);
 			if (!empty($enc) AND isset($this->encmaps->encmap[$enc])) {
 				$enc_map = $this->encmaps->encmap[$enc];
@@ -13709,7 +13709,7 @@ class TCPDF {
 		$color = preg_replace('/[\s]*/', '', $hcolor); // remove extra spaces
 		$color = strtolower($color);
 		// check for javascript color array syntax
-		if (strpos($color, '[') !== false) {
+		if (@strpos($color, '[') !== false) {
 			if (preg_match('/[\[][\"\'](t|g|rgb|cmyk)[\"\'][\,]?([0-9\.]*)[\,]?([0-9\.]*)[\,]?([0-9\.]*)[\,]?([0-9\.]*)[\]]/', $color, $m) > 0) {
 				$returncolor = array();
 				switch ($m[1]) {
@@ -13741,7 +13741,7 @@ class TCPDF {
 				}
 				return $returncolor;
 			}
-		} elseif (($dotpos = strpos($color, '.')) !== false) {
+		} elseif (($dotpos = @strpos($color, '.')) !== false) {
 			// remove class parent (i.e.: color.red)
 			$color = substr($color, ($dotpos + 1));
 			if ($color == 'transparent') {
@@ -13758,7 +13758,7 @@ class TCPDF {
 			$codes = str_replace(')', '', $codes);
 			$returncolor = explode(',', $codes);
 			foreach ($returncolor as $key => $val) {
-				if (strpos($val, '%') > 0) {
+				if (@strpos($val, '%') > 0) {
 					// percentage
 					$returncolor[$key] = (255 * intval($val) / 100);
 				} else {
@@ -13775,7 +13775,7 @@ class TCPDF {
 			$codes = str_replace(')', '', $codes);
 			$returncolor = explode(',', $codes);
 			foreach ($returncolor as $key => $val) {
-				if (strpos($val, '%') !== false) {
+				if (@strpos($val, '%') !== false) {
 					// percentage
 					$returncolor[$key] = (100 * intval($val) / 100);
 				} else {
@@ -13810,26 +13810,26 @@ class TCPDF {
 				$g = substr($color_code, 1, 1);
 				$b = substr($color_code, 2, 1);
 				$returncolor = array();
-				$returncolor['R'] = max(0, min(255, hexdec($r.$r)));
-				$returncolor['G'] = max(0, min(255, hexdec($g.$g)));
-				$returncolor['B'] = max(0, min(255, hexdec($b.$b)));
+				$returncolor['R'] = max(0, min(255, @hexdec($r.$r)));
+				$returncolor['G'] = max(0, min(255, @hexdec($g.$g)));
+				$returncolor['B'] = max(0, min(255, @hexdec($b.$b)));
 				break;
 			}
 			case 6: {
 				// 6-digit RGB hexadecimal representation
 				$returncolor = array();
-				$returncolor['R'] = max(0, min(255, hexdec(substr($color_code, 0, 2))));
-				$returncolor['G'] = max(0, min(255, hexdec(substr($color_code, 2, 2))));
-				$returncolor['B'] = max(0, min(255, hexdec(substr($color_code, 4, 2))));
+				$returncolor['R'] = max(0, min(255, @hexdec(substr($color_code, 0, 2))));
+				$returncolor['G'] = max(0, min(255, @hexdec(substr($color_code, 2, 2))));
+				$returncolor['B'] = max(0, min(255, @hexdec(substr($color_code, 4, 2))));
 				break;
 			}
 			case 8: {
 				// 8-digit CMYK hexadecimal representation
 				$returncolor = array();
-				$returncolor['C'] = max(0, min(100, round(hexdec(substr($color_code, 0, 2)) / 2.55)));
-				$returncolor['M'] = max(0, min(100, round(hexdec(substr($color_code, 2, 2)) / 2.55)));
-				$returncolor['Y'] = max(0, min(100, round(hexdec(substr($color_code, 4, 2)) / 2.55)));
-				$returncolor['K'] = max(0, min(100, round(hexdec(substr($color_code, 6, 2)) / 2.55)));
+				$returncolor['C'] = max(0, min(100, round(@hexdec(substr($color_code, 0, 2)) / 2.55)));
+				$returncolor['M'] = max(0, min(100, round(@hexdec(substr($color_code, 2, 2)) / 2.55)));
+				$returncolor['Y'] = max(0, min(100, round(@hexdec(substr($color_code, 4, 2)) / 2.55)));
+				$returncolor['K'] = max(0, min(100, round(@hexdec(substr($color_code, 6, 2)) / 2.55)));
 				break;
 			}
 			default: {
@@ -14364,7 +14364,7 @@ class TCPDF {
 				$signature = file_get_contents($tempencfile, false, null, $envelope_length);
 				unlink($tempencfile);
 				// extract signature
-				$signature = substr($signature, strpos($signature, 'Content-Disposition'));
+				$signature = substr($signature, @strpos($signature, 'Content-Disposition'));
 				$tmparr = explode("\n\n", $signature);
 				$signature = trim($tmparr[1]);
 				unset($tmparr);
@@ -14546,7 +14546,7 @@ class TCPDF {
 			++$bslength;
 		}
 		for ($i = 0; $i < $bslength; $i += 2) {
-			$string .= chr(hexdec($bs[$i].$bs[($i + 1)]));
+			$string .= chr(@hexdec($bs[$i].$bs[($i + 1)]));
 		}
 		return $string;
 	}
@@ -15141,7 +15141,7 @@ class TCPDF {
 	 * @see SetLineStyle()
 	 */
 	public function Rect($x, $y, $w, $h, $style='', $border_style=array(), $fill_color=array()) {
-		if (!(false === strpos($style, 'F')) AND !empty($fill_color)) {
+		if (!(false === @strpos($style, 'F')) AND !empty($fill_color)) {
 			$this->SetFillColorArray($fill_color);
 		}
 		$op = $this->getPathPaintOperator($style);
@@ -15196,7 +15196,7 @@ class TCPDF {
 	 * @since 2.1.000 (2008-01-08)
 	 */
 	public function Curve($x0, $y0, $x1, $y1, $x2, $y2, $x3, $y3, $style='', $line_style=array(), $fill_color=array()) {
-		if (!(false === strpos($style, 'F')) AND isset($fill_color)) {
+		if (!(false === @strpos($style, 'F')) AND isset($fill_color)) {
 			$this->SetFillColorArray($fill_color);
 		}
 		$op = $this->getPathPaintOperator($style);
@@ -15223,7 +15223,7 @@ class TCPDF {
 	 * @since 3.0008 (2008-05-12)
 	 */
 	public function Polycurve($x0, $y0, $segments, $style='', $line_style=array(), $fill_color=array()) {
-		if (!(false === strpos($style, 'F')) AND isset($fill_color)) {
+		if (!(false === @strpos($style, 'F')) AND isset($fill_color)) {
 			$this->SetFillColorArray($fill_color);
 		}
 		$op = $this->getPathPaintOperator($style);
@@ -15263,7 +15263,7 @@ class TCPDF {
 		if ($this->empty_string($ry) OR ($ry == 0)) {
 			$ry = $rx;
 		}
-		if (!(false === strpos($style, 'F')) AND isset($fill_color)) {
+		if (!(false === @strpos($style, 'F')) AND isset($fill_color)) {
 			$this->SetFillColorArray($fill_color);
 		}
 		$op = $this->getPathPaintOperator($style);
@@ -15476,7 +15476,7 @@ class TCPDF {
 			}
 			$nc += 4;
 		}
-		if (!(false === strpos($style, 'F')) AND isset($fill_color)) {
+		if (!(false === @strpos($style, 'F')) AND isset($fill_color)) {
 			$this->SetFillColorArray($fill_color);
 		}
 		$op = $this->getPathPaintOperator($style);
@@ -15676,7 +15676,7 @@ class TCPDF {
 			return;
 		}
 		// Rounded
-		if (!(false === strpos($style, 'F')) AND isset($fill_color)) {
+		if (!(false === @strpos($style, 'F')) AND isset($fill_color)) {
 			$this->SetFillColorArray($fill_color);
 		}
 		$op = $this->getPathPaintOperator($style);
@@ -16612,11 +16612,11 @@ class TCPDF {
 			$style = 0;
 			if (!empty($o['s'])) {
 				// bold
-				if (strpos($o['s'], 'B') !== false) {
+				if (@strpos($o['s'], 'B') !== false) {
 					$style |= 2;
 				}
 				// oblique
-				if (strpos($o['s'], 'I') !== false) {
+				if (@strpos($o['s'], 'I') !== false) {
 					$style |= 1;
 				}
 			}
@@ -16681,7 +16681,7 @@ class TCPDF {
 		if ($this->pdfa_mode OR (empty($this->javascript) AND empty($this->js_objects))) {
 			return;
 		}
-		if (strpos($this->javascript, 'this.addField') > 0) {
+		if (@strpos($this->javascript, 'this.addField') > 0) {
 			if (!$this->ur['enabled']) {
 				//$this->setUserRights();
 			}
@@ -16734,7 +16734,7 @@ class TCPDF {
 	protected function _JScolor($color) {
 		static $aColors = array('transparent', 'black', 'white', 'red', 'green', 'blue', 'cyan', 'magenta', 'yellow', 'dkGray', 'gray', 'ltGray');
 		if (substr($color,0,1) == '#') {
-			return sprintf("['RGB',%F,%F,%F]", hexdec(substr($color,1,2))/255, hexdec(substr($color,3,2))/255, hexdec(substr($color,5,2))/255);
+			return sprintf("['RGB',%F,%F,%F]", @hexdec(substr($color,1,2))/255, @hexdec(substr($color,3,2))/255, @hexdec(substr($color,5,2))/255);
 		}
 		if (!in_array($color,$aColors)) {
 			$this->Error('Invalid color: '.$color);
@@ -18810,8 +18810,8 @@ class TCPDF {
 				if ($patch_array[$i]['points'][$j] > $bpcd) {
 					$patch_array[$i]['points'][$j] = $bpcd;
 				}
-				$this->gradients[$n]['stream'] .= chr(floor($patch_array[$i]['points'][$j] / 256));
-				$this->gradients[$n]['stream'] .= chr(floor($patch_array[$i]['points'][$j] % 256));
+				$this->gradients[$n]['stream'] .= chr(@floor($patch_array[$i]['points'][$j] / 256));
+				$this->gradients[$n]['stream'] .= chr(@floor($patch_array[$i]['points'][$j] % 256));
 			}
 			$count_cols = count($patch_array[$i]['colors']);
 			for ($j=0; $j < $count_cols; ++$j) {
@@ -19251,7 +19251,7 @@ class TCPDF {
 		preg_match("/%%Creator:([^\r\n]+)/", $data, $regs); # find Creator
 		if (count($regs) > 1) {
 			$version_str = trim($regs[1]); # e.g. "Adobe Illustrator(R) 8.0"
-			if (strpos($version_str, 'Adobe Illustrator') !== false) {
+			if (@strpos($version_str, 'Adobe Illustrator') !== false) {
 				$versexp = explode(' ', $version_str);
 				$version = (float)array_pop($versexp);
 				if ($version >= 9) {
@@ -19260,7 +19260,7 @@ class TCPDF {
 			}
 		}
 		// strip binary bytes in front of PS-header
-		$start = strpos($data, '%!PS-Adobe');
+		$start = @strpos($data, '%!PS-Adobe');
 		if ($start > 0) {
 			$data = substr($data, $start);
 		}
@@ -19271,17 +19271,17 @@ class TCPDF {
 		} else {
 			$this->Error('No BoundingBox found in EPS/AI file: '.$file);
 		}
-		$start = strpos($data, '%%EndSetup');
+		$start = @strpos($data, '%%EndSetup');
 		if ($start === false) {
-			$start = strpos($data, '%%EndProlog');
+			$start = @strpos($data, '%%EndProlog');
 		}
 		if ($start === false) {
-			$start = strpos($data, '%%BoundingBox');
+			$start = @strpos($data, '%%BoundingBox');
 		}
 		$data = substr($data, $start);
-		$end = strpos($data, '%%PageTrailer');
+		$end = @strpos($data, '%%PageTrailer');
 		if ($end===false) {
-			$end = strpos($data, 'showpage');
+			$end = @strpos($data, 'showpage');
 		}
 		if ($end) {
 			$data = substr($data, 0, $end);
@@ -20383,7 +20383,7 @@ class TCPDF {
 		}
 		// split groups of selectors (comma-separated list of selectors)
 		foreach ($cssblocks as $key => $block) {
-			if (strpos($block[0], ',') > 0) {
+			if (@strpos($block[0], ',') > 0) {
 				$selectors = explode(',', $block[0]);
 				foreach ($selectors as $sel) {
 					$cssblocks[] = array(0 => trim($sel), 1 => $block[1]);
@@ -20492,7 +20492,7 @@ class TCPDF {
 											break;
 										}
 										case '*=': {
-											if (strpos($dom[$key]['attribute'][$att], $val) !== false) {
+											if (@strpos($dom[$key]['attribute'][$att], $val) !== false) {
 												$valid = true;
 											}
 											break;
@@ -20591,7 +20591,7 @@ class TCPDF {
 		}
 		// get all styles that apply
 		foreach($css as $selector => $style) {
-			$pos = strpos($selector, ' ');
+			$pos = @strpos($selector, ' ');
 			// get specificity
 			$specificity = substr($selector, 0, $pos);
 			// remove specificity
@@ -20634,10 +20634,10 @@ class TCPDF {
 			$csscmds = explode(';', $style['c']);
 			foreach ($csscmds as $cmd) {
 				if (!empty($cmd)) {
-					$pos = strpos($cmd, ':');
+					$pos = @strpos($cmd, ':');
 					if ($pos !== false) {
 						$cmd = substr($cmd, 0, ($pos + 1));
-						if (strpos($tagstyle, $cmd) !== false) {
+						if (@strpos($tagstyle, $cmd) !== false) {
 							// remove duplicate commands (last commands have high priority)
 							$tagstyle = preg_replace('/'.$cmd.'[^;]+/i', '', $tagstyle);
 						}
@@ -21072,7 +21072,7 @@ class TCPDF {
 		$repTable = array("\t" => ' ', "\0" => ' ', "\x0B" => ' ', "\\" => "\\\\");
 		$html = strtr($html, $repTable);
 		$offset = 0;
-		while (($offset < strlen($html)) AND ($pos = strpos($html, '</pre>', $offset)) !== false) {
+		while (($offset < strlen($html)) AND ($pos = @strpos($html, '</pre>', $offset)) !== false) {
 			$html_a = substr($html, 0, $offset);
 			$html_b = substr($html, $offset, ($pos - $offset + 6));
 			while (preg_match("'<xre([^\>]*)>(.*?)\n(.*?)</pre>'si", $html_b)) {
@@ -21087,7 +21087,7 @@ class TCPDF {
 			$offset = strlen($html_a.$html_b);
 		}
 		$offset = 0;
-		while (($offset < strlen($html)) AND ($pos = strpos($html, '</textarea>', $offset)) !== false) {
+		while (($offset < strlen($html)) AND ($pos = @strpos($html, '</textarea>', $offset)) !== false) {
 			$html_a = substr($html, 0, $offset);
 			$html_b = substr($html, $offset, ($pos - $offset + 11));
 			while (preg_match("'<textarea([^\>]*)>(.*?)\n(.*?)</textarea>'si", $html_b)) {
@@ -21101,7 +21101,7 @@ class TCPDF {
 		$html = preg_replace('/([\s]*)<option/si', '<option', $html);
 		$html = preg_replace('/<\/option>([\s]*)/si', '</option>', $html);
 		$offset = 0;
-		while (($offset < strlen($html)) AND ($pos = strpos($html, '</option>', $offset)) !== false) {
+		while (($offset < strlen($html)) AND ($pos = @strpos($html, '</option>', $offset)) !== false) {
 			$html_a = substr($html, 0, $offset);
 			$html_b = substr($html, $offset, ($pos - $offset + 9));
 			while (preg_match("'<option([^\>]*)>(.*?)</option>'si", $html_b)) {
@@ -21423,7 +21423,7 @@ class TCPDF {
 						// font style
 						if (isset($dom[$key]['style']['font-weight'])) {
 							if (strtolower($dom[$key]['style']['font-weight'][0]) == 'n') {
-								if (strpos($dom[$key]['fontstyle'], 'B') !== false) {
+								if (@strpos($dom[$key]['fontstyle'], 'B') !== false) {
 									$dom[$key]['fontstyle'] = str_replace('B', '', $dom[$key]['fontstyle']);
 								}
 							} elseif (strtolower($dom[$key]['style']['font-weight'][0]) == 'b') {
@@ -22351,7 +22351,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 									$pmid = substr($pmid, 0, ($pos1 + 2)).substr($pmid, ($pos1 + 2 + $spacelen));
 									if (substr($pmid, $pos1, 4) == '[()]') {
 										$linew -= $one_space_width;
-									} elseif ($pos1 == strpos($pmid, '[(')) {
+									} elseif ($pos1 == @strpos($pmid, '[(')) {
 										$no = 1;
 									}
 								}
@@ -22436,12 +22436,12 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 								global $spacew;
 								while (preg_match('/([0-9\.\+\-]*)[\s](Td|cm|m|l|c|re)[\s]/x', $pmid, $strpiece, PREG_OFFSET_CAPTURE, $offset) == 1) {
 									// check if we are inside a string section '[( ... )]'
-									$stroffset = strpos($pmid, '[(', $offset);
+									$stroffset = @strpos($pmid, '[(', $offset);
 									if (($stroffset !== false) AND ($stroffset <= $strpiece[2][1])) {
 										// set offset to the end of string section
-										$offset = strpos($pmid, ')]', $stroffset);
+										$offset = @strpos($pmid, ')]', $stroffset);
 										while (($offset !== false) AND ($pmid[($offset - 1)] == '\\')) {
-											$offset = strpos($pmid, ')]', ($offset + 1));
+											$offset = @strpos($pmid, ')]', ($offset + 1));
 										}
 										if ($offset === false) {
 											$this->Error('HTML Justification: malformed PDF code.');
@@ -22454,13 +22454,13 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 										$spacew = ($spacewidth * $ns);
 									}
 									$offset = $strpiece[2][1] + strlen($strpiece[2][0]);
-									$epsposbeg = strpos($pmid, 'q'.$this->epsmarker, $offset);
-									$epsposend = strpos($pmid, $this->epsmarker.'Q', $offset) + strlen($this->epsmarker.'Q');
+									$epsposbeg = @strpos($pmid, 'q'.$this->epsmarker, $offset);
+									$epsposend = @strpos($pmid, $this->epsmarker.'Q', $offset) + strlen($this->epsmarker.'Q');
 									if ((($epsposbeg > 0) AND ($epsposend > 0) AND ($offset > $epsposbeg) AND ($offset < $epsposend))
 										OR (($epsposbeg === false) AND ($epsposend > 0) AND ($offset < $epsposend))) {
 										// shift EPS images
 										$trx = sprintf('1 0 0 1 %F 0 cm', $spacew);
-										$epsposbeg = strpos($pmid, 'q'.$this->epsmarker, ($prev_epsposbeg - 6));
+										$epsposbeg = @strpos($pmid, 'q'.$this->epsmarker, ($prev_epsposbeg - 6));
 										$pmid_b = substr($pmid, 0, $epsposbeg);
 										$pmid_m = substr($pmid, $epsposbeg, ($epsposend - $epsposbeg));
 										$pmid_e = substr($pmid, $epsposend);
@@ -22499,7 +22499,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 											// justify block
 											if (!$this->empty_string($this->lispacer)) {
 												$this->lispacer = '';
-												continue;
+												continue 2;
 											}
 											preg_match('/([0-9\.\+\-]*)[\s]([0-9\.\+\-]*)[\s]([0-9\.\+\-]*)[\s]('.$strpiece[1][0].')[\s](re)([\s]*)/x', $pmid, $xmatches);
 											$currentxpos = $xmatches[1];
@@ -23255,7 +23255,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 							$pmid = substr($pmid, 0, ($pos1 + 2)).substr($pmid, ($pos1 + 2 + $spacelen));
 							if (substr($pmid, $pos1, 4) == '[()]') {
 								$linew -= $one_space_width;
-							} elseif ($pos1 == strpos($pmid, '[(')) {
+							} elseif ($pos1 == @strpos($pmid, '[(')) {
 								$no = 1;
 							}
 						}
@@ -23489,7 +23489,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 						}
 						// replace relative path with real server path
 						if (($tag['attribute']['src'][0] == '/') AND !empty($_SERVER['DOCUMENT_ROOT']) AND ($_SERVER['DOCUMENT_ROOT'] != '/')) {
-							$findroot = strpos($tag['attribute']['src'], $_SERVER['DOCUMENT_ROOT']);
+							$findroot = @strpos($tag['attribute']['src'], $_SERVER['DOCUMENT_ROOT']);
 							if (($findroot === false) OR ($findroot > 1)) {
 								if (substr($_SERVER['DOCUMENT_ROOT'], -1) == '/') {
 									$tag['attribute']['src'] = substr($_SERVER['DOCUMENT_ROOT'], 0, -1).$tag['attribute']['src'];
@@ -23933,7 +23933,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 					$options = explode('#!NwL!#', $tag['attribute']['opt']);
 					$values = array();
 					foreach ($options as $val) {
-						if (strpos($val, '#!TaB!#') !== false) {
+						if (@strpos($val, '#!TaB!#') !== false) {
 							$opts = explode('#!TaB!#', $val);
 							$values[] = $opts;
 							$w = max($w, $this->GetStringWidth($opts[1]));
@@ -26500,7 +26500,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 	public function revstrpos($haystack, $needle, $offset = 0) {
 		$length = strlen($haystack);
 		$offset = ($offset > 0)?($length - $offset):abs($offset);
-		$pos = strpos(strrev($haystack), strrev($needle), $offset);
+		$pos = @strpos(strrev($haystack), strrev($needle), $offset);
 		return ($pos === false)?false:($length - $pos - strlen($needle));
 	}
 
@@ -29078,7 +29078,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 							$img = $this->svgdir.'/'.$img;
 						}
 						if (($img[0] == '/') AND !empty($_SERVER['DOCUMENT_ROOT']) AND ($_SERVER['DOCUMENT_ROOT'] != '/')) {
-							$findroot = strpos($img, $_SERVER['DOCUMENT_ROOT']);
+							$findroot = @strpos($img, $_SERVER['DOCUMENT_ROOT']);
 							if (($findroot === false) OR ($findroot > 1)) {
 								if (substr($_SERVER['DOCUMENT_ROOT'], -1) == '/') {
 									$img = substr($_SERVER['DOCUMENT_ROOT'], 0, -1).$img;

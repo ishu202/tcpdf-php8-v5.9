@@ -1465,7 +1465,7 @@ class TCPDFBarcode {
 			}
 			$seq .= '01010'; // center guard bar
 			for ($i = $half_len; $i < $len; ++$i) {
-				$seq .= $codes['C'][$code[$i]];
+				$seq .= $codes['C'][$code["$i"]];
 			}
 			$seq .= '101'; // right guard bar
 		}

@@ -18,6 +18,7 @@
 //               www.tecnick.com
 //               info@tecnick.com
 //============================================================+
+global $l;
 
 /**
  * Creates an example PDF TEST document using TCPDF
@@ -27,8 +28,9 @@
  * @since 2008-03-04
  */
 
-require_once('../config/lang/eng.php');
-require_once('../tcpdf.php');
+require_once("vendor/autoload.php");
+//require_once('../config/lang/eng.php');
+//require_once('../tcpdf.php');
 
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -127,7 +129,7 @@ $pdf->Line(15, 120, 195, 120, $linestyle);
 
 // Print an image to explain cell measures
 
-$pdf->Image('../images/tcpdf_cell.png', 15, 160, 100, 100, 'PNG', '', '', false, 300, '', false, false, 0, false, false, false);
+$pdf->Image('/srv/tcpdf/images/tcpdf_cell.png', 15, 160, 100, 100, 'PNG', '', '', false, 300, '', false, false, 0, false, false, false);
 $legend = 'LEGEND:
 
 X: cell x top-left origin (top-right for RTL)

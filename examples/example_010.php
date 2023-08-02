@@ -18,6 +18,7 @@
 //               www.tecnick.com
 //               info@tecnick.com
 //============================================================+
+global $l;
 
 /**
  * Creates an example PDF TEST document using TCPDF
@@ -26,9 +27,9 @@
  * @author Nicola Asuni
  * @since 2008-03-04
  */
-
-require_once('../config/lang/eng.php');
-require_once('../tcpdf.php');
+require_once("vendor/autoload.php");
+//require_once('../config/lang/eng.php');
+//require_once('../tcpdf.php');
 
 
 /**
@@ -135,10 +136,10 @@ $pdf->setLanguageArray($l);
 // ---------------------------------------------------------
 
 // print TEXT
-$pdf->PrintChapter(1, 'LOREM IPSUM [TEXT]', '../cache/chapter_demo_1.txt', false);
+$pdf->PrintChapter(1, 'LOREM IPSUM [TEXT]', getcwd() . '/chapter_demo_1.txt', false);
 
 // print HTML
-$pdf->PrintChapter(2, 'LOREM IPSUM [HTML]', '../cache/chapter_demo_2.txt', true);
+$pdf->PrintChapter(2, 'LOREM IPSUM [HTML]', getcwd() . '/cache/chapter_demo_2.txt', true);
 
 // ---------------------------------------------------------
 

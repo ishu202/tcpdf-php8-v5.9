@@ -34,6 +34,7 @@ RUN set -eux; \
         opcache \
         ssh2 \
         gettext \
+        bcmath \
     ;
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser

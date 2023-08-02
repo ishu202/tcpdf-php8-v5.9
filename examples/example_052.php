@@ -18,6 +18,7 @@
 //               www.tecnick.com
 //               info@tecnick.com
 //============================================================+
+global $l;
 
 /**
  * Creates an example PDF TEST document using TCPDF
@@ -27,8 +28,9 @@
  * @since 2009-05-07
  */
 
-require_once('../config/lang/eng.php');
-require_once('../tcpdf.php');
+require_once("vendor/autoload.php");
+//require_once('../config/lang/eng.php');
+//require_once('../tcpdf.php');
 
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -101,7 +103,7 @@ $pdf->writeHTML($text, true, 0, true, 0);
 // *** set signature appearance ***
 
 // create content for signature (image and/or text)
-$pdf->Image('../images/tcpdf_signature.png', 180, 60, 15, 15, 'PNG');
+$pdf->Image('/srv/tcpdf/images/tcpdf_signature.png', 180, 60, 15, 15, 'PNG');
 
 // define active area for signature appearance
 $pdf->setSignatureAppearance(180, 60, 15, 15);

@@ -18,6 +18,7 @@
 //               www.tecnick.com
 //               info@tecnick.com
 //============================================================+
+global $l;
 
 /**
  * Creates an example PDF TEST document using TCPDF
@@ -27,8 +28,9 @@
  * @since 2008-03-04
  */
 
-require_once('../config/lang/eng.php');
-require_once('../tcpdf.php');
+require_once("vendor/autoload.php");
+//require_once('../config/lang/eng.php');
+//require_once('../tcpdf.php');
 
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -94,25 +96,25 @@ $pdf->Write(0, 'Neither fill nor stroke text (invisible)', '', 0, '', true, 0, f
 $pdf->StartTransform();
 $pdf->setTextRenderingMode($stroke=0, $fill=true, $clip=true);
 $pdf->Write(0, 'Fill text and add to path for clipping', '', 0, '', true, 0, false, false, 0);
-$pdf->Image('../images/image_demo.jpg', 15, 65, 170, 10, '', '', '', true, 72);
+$pdf->Image('/srv/tcpdf/images/image_demo.jpg', 15, 65, 170, 10, '', '', '', true, 72);
 $pdf->StopTransform();
 
 $pdf->StartTransform();
 $pdf->setTextRenderingMode($stroke=0.3, $fill=false, $clip=true);
 $pdf->Write(0, 'Stroke text and add to path for clipping', '', 0, '', true, 0, false, false, 0);
-$pdf->Image('../images/image_demo.jpg', 15, 75, 170, 10, '', '', '', true, 72);
+$pdf->Image('/srv/tcpdf/images/image_demo.jpg', 15, 75, 170, 10, '', '', '', true, 72);
 $pdf->StopTransform();
 
 $pdf->StartTransform();
 $pdf->setTextRenderingMode($stroke=0.3, $fill=true, $clip=true);
 $pdf->Write(0, 'Fill, then stroke text and add to path for clipping', '', 0, '', true, 0, false, false, 0);
-$pdf->Image('../images/image_demo.jpg', 15, 85, 170, 10, '', '', '', true, 72);
+$pdf->Image('/srv/tcpdf/images/image_demo.jpg', 15, 85, 170, 10, '', '', '', true, 72);
 $pdf->StopTransform();
 
 $pdf->StartTransform();
 $pdf->setTextRenderingMode($stroke=0, $fill=false, $clip=true);
 $pdf->Write(0, 'Add text to path for clipping', '', 0, '', true, 0, false, false, 0);
-$pdf->Image('../images/image_demo.jpg', 15, 95, 170, 10, '', '', '', true, 72);
+$pdf->Image('/srv/tcpdf/images/image_demo.jpg', 15, 95, 170, 10, '', '', '', true, 72);
 $pdf->StopTransform();
 
 // reset text rendering mode

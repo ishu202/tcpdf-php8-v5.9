@@ -18,6 +18,7 @@
 //               www.tecnick.com
 //               info@tecnick.com
 //============================================================+
+global $l;
 
 /**
  * Creates an example PDF TEST document using TCPDF
@@ -27,8 +28,9 @@
  * @since 2008-06-09
  */
 
-require_once('../config/lang/eng.php');
-require_once('../tcpdf.php');
+require_once("vendor/autoload.php");
+//require_once('../config/lang/eng.php');
+//require_once('../tcpdf.php');
 
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -108,7 +110,7 @@ $pdf->CoonsPatchMesh(20, 155, 80, 80, $yellow, $blue, $green, $red);
 // write label
 $pdf->Text(20, 240, 'CoonsPatchMesh()');
 
-// set the coordinates for the cubic Bézier points x1,y1 ... x12, y12 of the patch (see coons_patch_mesh_coords.jpg)
+// set the coordinates for the cubic Bï¿½zier points x1,y1 ... x12, y12 of the patch (see coons_patch_mesh_coords.jpg)
 $coords = array(
 	0.00,0.00, 0.33,0.20,             //lower left
 	0.67,0.00, 1.00,0.00, 0.80,0.33,  //lower right

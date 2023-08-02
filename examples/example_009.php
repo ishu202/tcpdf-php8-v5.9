@@ -18,6 +18,7 @@
 //               www.tecnick.com
 //               info@tecnick.com
 //============================================================+
+global $l;
 
 /**
  * Creates an example PDF TEST document using TCPDF
@@ -26,9 +27,9 @@
  * @author Nicola Asuni
  * @since 2008-03-04
  */
-
-require_once('../config/lang/eng.php');
-require_once('../tcpdf.php');
+require_once("vendor/autoload.php");
+//require_once('../config/lang/eng.php');
+//require_once('../tcpdf.php');
 
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -86,7 +87,7 @@ $pdf->Image('@'.$imgdata);
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // Image example with resizing
-$pdf->Image('../images/image_demo.jpg', 15, 140, 75, 113, 'JPG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 1, false, false, false);
+$pdf->Image('/srv/tcpdf/images/image_demo.jpg', 15, 140, 75, 113, 'JPG', 'http://www.tcpdf.org', '', true, 150, '', false, false, 1, false, false, false);
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -106,7 +107,7 @@ for ($i = 0; $i < 3; ++$i) {
 	for ($j = 0; $j < 3; ++$j) {
 		$fitbox[1] = $vertical_alignments[$j];
 		$pdf->Rect($x, $y, $w, $h, 'F', array(), array(128,255,128));
-		$pdf->Image('../images/image_demo.jpg', $x, $y, $w, $h, 'JPG', '', '', false, 300, '', false, false, 0, $fitbox, false, false);
+		$pdf->Image('/srv/tcpdf/images/image_demo.jpg', $x, $y, $w, $h, 'JPG', '', '', false, 300, '', false, false, 0, $fitbox, false, false);
 		$x += 32; // new column
 	}
 	$y += 32; // new row
@@ -122,7 +123,7 @@ for ($i = 0; $i < 3; ++$i) {
 	for ($j = 0; $j < 3; ++$j) {
 		$fitbox[1] = $vertical_alignments[$j];
 		$pdf->Rect($x, $y, $w, $h, 'F', array(), array(128,255,255));
-		$pdf->Image('../images/image_demo.jpg', $x, $y, $w, $h, 'JPG', '', '', false, 300, '', false, false, 0, $fitbox, false, false);
+		$pdf->Image('/srv/tcpdf/images/image_demo.jpg', $x, $y, $w, $h, 'JPG', '', '', false, 300, '', false, false, 0, $fitbox, false, false);
 		$x += 27; // new column
 	}
 	$y += 52; // new row
@@ -133,8 +134,8 @@ for ($i = 0; $i < 3; ++$i) {
 // Stretching, position and alignment example
 
 $pdf->SetXY(110, 200);
-$pdf->Image('../images/image_demo.jpg', '', '', 40, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
-$pdf->Image('../images/image_demo.jpg', '', '', 40, 40, '', '', '', false, 300, '', false, false, 1, false, false, false);
+$pdf->Image('/srv/tcpdf/images/image_demo.jpg', '', '', 40, 40, '', '', 'T', false, 300, '', false, false, 1, false, false, false);
+$pdf->Image('/srv/tcpdf/images/image_demo.jpg', '', '', 40, 40, '', '', '', false, 300, '', false, false, 1, false, false, false);
 
 // -------------------------------------------------------------------
 

@@ -19,6 +19,7 @@
 //               www.tecnick.com
 //               info@tecnick.com
 //============================================================+
+global $l;
 
 /**
 * Creates an example PDF TEST document using TCPDF
@@ -28,8 +29,9 @@
 * @since 2008-03-04
 */
 
-require_once('../config/lang/eng.php');
-require_once('../tcpdf.php');
+require_once("vendor/autoload.php");
+//require_once('../config/lang/eng.php');
+//require_once('../tcpdf.php');
 
 // extend TCPF with custom functions
 class MYPDF extends TCPDF {

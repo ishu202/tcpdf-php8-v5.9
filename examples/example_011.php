@@ -18,6 +18,7 @@
 //               www.tecnick.com
 //               info@tecnick.com
 //============================================================+
+global $l;
 
 /**
  * Creates an example PDF TEST document using TCPDF
@@ -26,9 +27,9 @@
  * @author Nicola Asuni
  * @since 2008-03-04
  */
-
-require_once('../config/lang/eng.php');
-require_once('../tcpdf.php');
+require_once("vendor/autoload.php");
+//require_once('../config/lang/eng.php');
+//require_once('../tcpdf.php');
 
 // extend TCPF with custom functions
 class MYPDF extends TCPDF {
@@ -123,7 +124,7 @@ $pdf->AddPage();
 $header = array('Country', 'Capital', 'Area (sq km)', 'Pop. (thousands)');
 
 //Data loading
-$data = $pdf->LoadData('../cache/table_data_demo.txt');
+$data = $pdf->LoadData(getcwd() . '/cache/table_data_demo.txt');
 
 // print colored table
 $pdf->ColoredTable($header, $data);

@@ -18,6 +18,7 @@
 //               www.tecnick.com
 //               info@tecnick.com
 //============================================================+
+global $l;
 
 /**
  * Creates an example PDF TEST document using TCPDF
@@ -27,8 +28,9 @@
  * @since 2008-06-09
  */
 
-require_once('../config/lang/eng.php');
-require_once('../tcpdf.php');
+require_once("vendor/autoload.php");
+//require_once('../config/lang/eng.php');
+//require_once('../tcpdf.php');
 
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -73,15 +75,15 @@ $pdf->AddPage();
 
 $pdf->Write(0, 'Example of ImageEPS() method for AI and EPS images');
 
-$pdf->ImageEps($file='../images/tiger.ai', $x=10, $y=50, $w=190, $h=190, $link='', $useBoundingBox=true, $align='', $palign='', $border=0, $fitonpage=false);
+$pdf->ImageEps($file='/srv/tcpdf/images/tiger.ai', $x=10, $y=50, $w=190, $h=190, $link='', $useBoundingBox=true, $align='', $palign='', $border=0, $fitonpage=false);
 
 $pdf->AddPage();
 
-$pdf->ImageEps('../images/bug.eps', 0, 25, 0, 240, "http://www.tcpdf.org", true, 'T', 'C');
+$pdf->ImageEps('/srv/tcpdf/images/bug.eps', 0, 25, 0, 240, "http://www.tcpdf.org", true, 'T', 'C');
 
 $pdf->AddPage();
 
-$pdf->ImageEps('../images/pelican.ai', 15, 70, 180);
+$pdf->ImageEps('/srv/tcpdf/images/pelican.ai', 15, 70, 180);
 
 // ---------------------------------------------------------
 
