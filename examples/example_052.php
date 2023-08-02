@@ -76,7 +76,7 @@ NOTES:
 */
 
 // set certificate file
-$certificate = 'file://../tcpdf.crt';
+$certificate = 'file://tcpdf.crt';
 
 // set additional information
 $info = array(

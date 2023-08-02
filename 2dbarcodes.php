@@ -297,10 +297,10 @@ class TCPDF2DBarcode {
 				} else { // RAW2
 					// rows enclosed in square parentheses
 					$code = substr($code, 1, -1);
-					$rows = explode('][', $code);
+					$rows = @explode('][', $code);
 				}
-				$this->barcode_array['num_rows'] = count($rows);
-				$this->barcode_array['num_cols'] = strlen($rows[0]);
+				@$this->barcode_array['num_rows'] = count($rows);
+				$this->barcode_array['num_cols'] = @strlen($rows[0]);
 				$this->barcode_array['bcode'] = array();
 				foreach ($rows as $r) {
 					$this->barcode_array['bcode'][] = str_split($r, 1);

@@ -17940,8 +17940,7 @@ class TCPDF {
 		++$this->n; // signature object ($this->sig_obj_id + 1)
 		$this->signature_data = array();
 		if (strlen($signing_cert) == 0) {
-			$signing_cert = 'file://'.dirname(__FILE__).'/tcpdf.crt';
-			$private_key_password = 'tcpdfdemo';
+            $this->Error('Please provide a certificate file and password!');
 		}
 		if (strlen($private_key) == 0) {
 			$private_key = $signing_cert;
@@ -27779,7 +27778,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 		$f = ($this->h - $oy) * $this->k * (1 - $svgscale_y);
 		$this->_out(sprintf('%F %F %F %F %F %F cm', $svgscale_x, 0, 0, $svgscale_y, ($e + $svgoffset_x), ($f + $svgoffset_y)));
 		// creates a new XML parser to be used by the other XML functions
-		$this->parser = xml_parser_create('UTF-8');
+		@$this->parser = xml_parser_create('UTF-8');
 		// the following function allows to use parser inside object
 		xml_set_object($this->parser, $this);
 		// disable case-folding for this XML parser
