@@ -7443,7 +7443,7 @@ class TCPDF {
 
 	/**
 	 * Extract a slice of the $strarr array and return it as string.
-	 * @param $strarr (string) The input array of characters.
+	 * @param $strarr string[] The input array of characters.
 	 * @param $start (int) the starting element of $strarr.
 	 * @param $end (int) first element that will not be returned.
 	 * @return Return part of a string
@@ -7506,6 +7506,9 @@ class TCPDF {
 	 * @since 2.3.000 (2008-03-05)
 	 */
 	public function unichr($c) {
+        if ($c == '') {
+            return '';
+        }
 		if (!$this->isunicode) {
 			return chr($c);
 		} elseif ($c <= 0x7F) {
@@ -23466,8 +23469,11 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 			}
 			case 'a': {
 				if (array_key_exists('href', $tag['attribute'])) {
-					$this->HREF['url'] = $tag['attribute']['href'];
-				}
+                    if (!is_array($this->HREF)) {
+                        $this->HREF = [];
+                    }
+                    $this->HREF['url'] = $tag['attribute']['href'];
+                }
 				break;
 			}
 			case 'img': {
